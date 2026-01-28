@@ -1,0 +1,32 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+
+# Nx
+.nx/
+tmp/
+
+# Angular
+.angular/
+
+# NestJS
+coverage/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/

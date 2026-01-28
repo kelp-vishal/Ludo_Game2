@@ -1,0 +1,7 @@
+node_modules
+dist
+tmp
+out-tsc
+
+.DS_Store
+Thumbs.db
