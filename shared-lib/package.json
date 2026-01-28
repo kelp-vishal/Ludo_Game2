@@ -1,7 +1,7 @@
 {
-  "name": "@myorg/shared-lib",
+  "name": "@ludo-game/shared-lib",
   "version": "1.0.0",
-  "description": "Shared library for common code",
+  "description": "Shared library for Ludo Game - common interfaces, enums, and constants",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
