@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
-import { IRoom } from '../interfaces/socket.interfaces';
 import { environment } from '../../environments/environment';
-import { IGameState } from '../interfaces/ludo-board.interfaces';
-import { IRemoteGameState, IGameStateUpdate, IRoomPlayer } from '@ludo-game/shared-lib';
+import { IGameRoom, IGameState, IRemoteGameState, IGameStateUpdate, IRoomPlayer } from '@ludo-game/shared-lib';
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
-  Room: IRoom[] = [];
+  Room: IGameRoom[] = [];
 
   private socket: Socket | null = null;
   private connectedSubject = new BehaviorSubject<boolean>(false);
   private socketIdSubject = new BehaviorSubject<string>('');
-  private roomsSubject = new BehaviorSubject<IRoom[]>([]);
-  private currentRoomSubject = new BehaviorSubject<IRoom | null>(null);
+  private roomsSubject = new BehaviorSubject<IGameRoom[]>([]);
+  private currentRoomSubject = new BehaviorSubject<IGameRoom | null>(null);
   private playersInRoomSubject = new BehaviorSubject<IRoomPlayer[]>([]);
   private gameStateSubject = new BehaviorSubject<IGameState | null>(null);
   private gameStartedSubject = new BehaviorSubject<IGameState | null>(null);
@@ -34,7 +32,7 @@ export class SocketService {
   gameEnded$ = this.gameEndedSubject.asObservable();
 
   gameStarted$ = this.gameStartedSubject.asObservable();
-  playerLeft$: any;
+  playerLeft$ = this.playerLeftSubject.asObservable();
 
   constructor() {
     this.connect();
@@ -64,25 +62,25 @@ export class SocketService {
     });
 
     // Room events
-    this.socket.on('room-created', (data: { room: IRoom }) => {
+    this.socket.on('room-created', (data: { room: IGameRoom }) => {
       this.currentRoomSubject.next(data.room);
       this.playersInRoomSubject.next(data.room.players);
     });
 
-    this.socket.on('room-joined', (data: { room: IRoom; message: string }) => {
+    this.socket.on('room-joined', (data: { room: IGameRoom; message: string }) => {
       this.currentRoomSubject.next(data.room);
       this.playersInRoomSubject.next(data.room.players);
     });
 
     this.socket.on(
       'player-joined',
-      (data: { room: IRoom; message: string }) => {
+      (data: { room: IGameRoom; message: string }) => {
         this.currentRoomSubject.next(data.room);
         this.playersInRoomSubject.next(data.room.players);
       },
     );
 
-    this.socket.on('player-left', (data: { room: IRoom; message: string ,gameState?:IGameState;playerColor?: string}) => {
+    this.socket.on('player-left', (data: { room: IGameRoom; message: string ,gameState?:IGameState;playerColor?: string}) => {
       if (data.room) {
         this.currentRoomSubject.next(data.room);
         this.playersInRoomSubject.next(data.room.players);
@@ -94,7 +92,7 @@ export class SocketService {
       }
     });
 
-    this.socket.on('rooms-list', (data: { rooms: IRoom[] }) => {
+    this.socket.on('rooms-list', (data: { rooms: IGameRoom[] }) => {
       this.roomsSubject.next(data.rooms);
     });
 

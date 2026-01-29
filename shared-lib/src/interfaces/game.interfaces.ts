@@ -17,9 +17,11 @@ export interface IGameStateUpdate {
   pieces: { [pieceId: string]: number };
   movablePieces: string[];
   timestamp: Date;
-  lastMove?: {
-    pieceId: string;
-    fromPos: number;
-    toPos: number;
-  };
+  lastMove?: ILastMove;
+}
+
+export interface ILastMove {
+  pieceId: string;
+  fromPos: number;
+  toPos: number;
 }

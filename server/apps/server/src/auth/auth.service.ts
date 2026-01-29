@@ -8,7 +8,6 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ILoginResponse, IAuthResponse } from '@ludo-game/shared-lib';
-import { error } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -87,7 +86,7 @@ export class AuthService {
           email: newUser.email,
         },
       };
-    } catch {
+    } catch (error) {
       this.logger.error('Something Went Wrong while Registration..');
       throw error;
     }

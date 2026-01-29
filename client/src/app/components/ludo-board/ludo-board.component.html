@@ -68,13 +68,13 @@
       class="dice-container"
       (click)="rollDice()"
       [ngClass]="{
-        disabled: !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon(),
+        disabled: !isMyTurn() || valueDice() > 1 || isGameWon(),
       }"
     >
       <div
         class="dice"
         [ngClass]="{ rolling: isRolling }"
-        [attr.data-value]="gameState?.diceValue || 1"
+        [attr.data-value]="valueDice()"
       >
         <!-- Face 1 -->
         <div class="face front">

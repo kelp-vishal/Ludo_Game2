@@ -1,4 +1,4 @@
-import { IPlayers } from './socket.interfaces';
+import { IRoomPlayer } from '@ludo-game/shared-lib';
 
 export interface IPiece {
   id: string;
@@ -8,35 +8,10 @@ export interface IPiece {
   currentY: number;
 }
 
-export interface ILastMove {
-  pieceId: string;
-  fromPos: number;
-  toPos: number;
-}
-
-export interface IGameState {
-  activePlayers: string[];
-  currentTurn: number;
-  diceValue: number;
-  pieces: { [pieceId: string]: number };
-  gameWon: string | null;
-  movablePieces: string[];
-  timestamp: Date;
-  room: string | null;
-}
-
 export interface IAvailableRoom {
   roomId: string;
-  players: IPlayers[];
+  players: IRoomPlayer[];
   maxPlayers: number;
   currentPlayers: number;
   gameStarted: boolean;
-}
-export interface IGameStateUpdate {
-  currentTurn: number;
-  diceValue: number;
-  pieces: { [pieceId: string]: number };
-  movablePieces: string[];
-  timestamp: Date;
-  lastMove?: ILastMove;
 }

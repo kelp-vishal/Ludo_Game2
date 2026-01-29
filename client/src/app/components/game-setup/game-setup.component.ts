@@ -31,7 +31,10 @@ export class GameSetupComponent implements OnInit {
     private roomService: RoomService,
     private socketService: SocketService,
     public router: Router,
-  ) {}
+  ) {
+    // Ensure socket is connected when entering game-setup
+    this.socketService.connect();
+  }
 
   turnOrder: TurnOrder[] = [
     TurnOrder.RED,

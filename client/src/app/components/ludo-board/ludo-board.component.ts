@@ -1,12 +1,11 @@
 import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPiece } from '../../interfaces/ludo-board.interfaces';
-import { IGameState } from '../../interfaces/ludo-board.interfaces';
+import { IGameState, IGameStateUpdate } from '@ludo-game/shared-lib';
 import { GameService } from '../../services/game.service';
 import { SocketService } from '../../services/socket.service';
 import { RoomService } from '../../services/room.service';
 import { Subscription } from 'rxjs';
-import { IGameStateUpdate } from '@ludo-game/shared-lib';
 
 @Component({
   selector: 'app-ludo-board',
@@ -36,10 +35,18 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
   isRolling = false;
 
   ngOnInit(): void {
+    // Subscribe to pieces changes
+    const piecesSubscription = this.gameService.pieces$.subscribe(
+      (pieces) => {
+        this.pieces = pieces;
+      },
+    );
+
     // Subscribe to gameState changes
     const gameStateSubscription = this.gameService.gameState$.subscribe(
       (state) => {
         this.gameState = state;
+        // DON'T update valueDice here - it's managed by rollDice() and remote updates
       },
     );
 
@@ -49,8 +56,11 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
         if (remoteState) {
           this.gameService.applyRemoteGameState(remoteState.gameState);
           // Update dice value display for all players
-          if (remoteState.gameState.diceValue) {
+          if (remoteState.gameState.diceValue > 0) {
             this.valueDice.set(remoteState.gameState.diceValue);
+          } else {
+            // Reset dice to 1 when no active dice roll
+            this.valueDice.set(1);
           }
         }
       });
@@ -73,8 +83,6 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
     const playerLeftSubscription = this.socketService.playerLeft$.subscribe(
       (data: { playerColor: string; playerName: string; }) => {
         if (data && data.playerColor && this.gameState) {
-          console.log(`Player ${data.playerColor} disconnected, removing from game`);
-          
           // Remove disconnected player from active players
           this.gameState.activePlayers = this.gameState.activePlayers.filter(
             (color) => color !== data.playerColor
@@ -106,7 +114,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.subscriptions.push(gameStateSubscription, socketStateSubscription, gameEndedSubscription, playerLeftSubscription);
+    this.subscriptions.push(piecesSubscription, gameStateSubscription, socketStateSubscription, gameEndedSubscription, playerLeftSubscription);
   }
 
   ngOnDestroy(): void {
@@ -158,10 +166,10 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
   rollDice(): void {
     if (!this.gameState?.gameWon && this.isMyTurn()) {
       this.isRolling = true;
-      // this.syncGameStateWithOthers();
 
       const diceValue = this.gameService.rollDice();
       this.valueDice.set(diceValue);
+      
       this.syncGameStateWithOthers();
 
       setTimeout(() => {
@@ -176,6 +184,9 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
               this.gameState.activePlayers.length;
             this.gameService.updateGameState(this.gameState);
             this.syncGameStateWithOthers();
+            
+            // Reset dice display when turn changes
+            this.valueDice.set(1);
           }
         } else {
           // Normal case
@@ -225,6 +236,9 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
       const newPos = this.gameState?.pieces[pieceId] ?? -1;
       //Sync
       this.syncGameStateWithOthers(pieceId, oldPos, newPos);
+      
+      // Reset dice display after piece moves
+      this.valueDice.set(1);
     }
   }
 

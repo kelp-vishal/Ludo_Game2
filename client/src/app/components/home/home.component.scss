@@ -1,3 +1,24 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-20);
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-16);
+    justify-content: flex-start;
+    padding-top: var(--spacing-80);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--spacing-12);
+    padding-top: var(--spacing-70);
+  }
+}
+
 .home {
   text-align: left;
   display: flex;
@@ -19,29 +40,96 @@
     color: var(--text-light);
     margin: 0;
   }
+
+  // Tablet breakpoint
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    gap: var(--spacing-30);
+    margin: var(--spacing-60) auto var(--spacing-80);
+    text-align: center;
+  }
+
+  // Mobile breakpoint
+  @media (max-width: 768px) {
+    margin: var(--spacing-40) auto var(--spacing-60);
+    padding: 0 var(--spacing-16);
+    gap: var(--spacing-20);
+  }
+
+  @media (max-width: 480px) {
+    margin: var(--spacing-20) auto var(--spacing-40);
+    padding: 0 var(--spacing-12);
+  }
+}
+
+.ludo-image-container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    max-width: var(--width-400);
+  }
+
+  @media (max-width: 768px) {
+    max-width: var(--spacing-330);
+  }
+
+  @media (max-width: 480px) {
+    max-width: var(--spacing-200);
+  }
 }
 
 .ludo-image {
   width: 35vw;
   height: auto;
   max-width: var(--width-500);
+  border-radius: var(--radius-8);
+  box-shadow: 0 var(--spacing-4) var(--spacing-16) rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 1024px) {
+    max-width: var(--width-400);
+  }
+
+  @media (max-width: 768px) {
+    max-width: var(--spacing-330);
+  }
+
+  @media (max-width: 480px) {
+    max-width: var(--spacing-200);
+  }
 }
 
 button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   padding: var(--spacing-10) var(--spacing-15);
   color: var(--text-dark);
   border: none;
   border-radius: var(--radius-14);
   cursor: pointer;
   box-shadow: 0 var(--spacing-4) var(--spacing-6) var(--text-dark);
-  margin: var(--spacing-20);
+  margin-top: var(--spacing-40);
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: var(--bg-status-success);
     box-shadow: 0 var(--spacing-6) var(--spacing-8) var(--text-aqua);
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: var(--spacing-330);
+    margin-top: var(--spacing-30);
+    padding: var(--spacing-12) var(--spacing-20);
+  }
+
+  @media (max-width: 480px) {
+    width: 85%;
+    padding: var(--spacing-10) var(--spacing-16);
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-top: var(--spacing-20);
   }
 }
 
@@ -49,6 +137,32 @@ button {
   max-width: var(--width-500);
   margin-right: var(--spacing-40);
   color: var(--text-light);
+
+  @media (max-width: 1024px) {
+    margin-right: 0;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+    }
+
+    p {
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: clamp(1.2rem, 6vw, 1.8rem);
+    }
+
+    p {
+      font-size: clamp(0.8rem, 3.5vw, 1rem);
+    }
+  }
 }
 
 .animated-btn {
@@ -60,6 +174,14 @@ button {
   border-radius: var(--radius-8);
   cursor: pointer;
   animation: gradientShift 5s ease infinite;
+
+  @media (max-width: 768px) {
+    padding: var(--spacing-14) var(--spacing-32);
+  }
+
+  @media (max-width: 480px) {
+    padding: var(--spacing-12) var(--spacing-24);
+  }
 }
 .pWelcome{
   color: var(--bg-status-success);

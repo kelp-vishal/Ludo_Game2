@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  IGameState,
-  IPiece,
-} from '../interfaces/ludo-board.interfaces';
+import { IPiece } from '../interfaces/ludo-board.interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { 
   TurnOrder,
@@ -10,6 +7,7 @@ import {
   PathArrayGREEN,
   PathArrayRED,
   PathArrayYELLOW,
+  IGameState,
   IGameStateUpdate,
 } from '@ludo-game/shared-lib';
 
@@ -199,17 +197,18 @@ export class GameService {
       }
     });
 
-    this.initPieces();
-
     this.gameState.currentTurn = 0;
     this.gameState.diceValue = 0;
     this.gameState.gameWon = null;
     this.gameState.movablePieces = [];
     
-    // Sync pieces to UI immediately after initialization
+    // Initialize pieces and sync to UI
+    this.initPieces();
+    
+    // Force sync pieces to UI immediately
     this.syncUiPieces();
     
-    // Emit initial game state to update all subscribers
+    // Emit game state immediately to update all subscribers
     this.gameStateSubject.next({ ...this.gameState });
   }
 
@@ -222,6 +221,7 @@ export class GameService {
 
     const diceRoll = Math.floor(Math.random() * 6) + 1;
     this.gameState.diceValue = diceRoll;
+    
     this.gameState.movablePieces = this.calculateMovablePieces(
       currentPlayer,
       this.gameState.diceValue,
