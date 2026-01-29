@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   IGameState,
   IPiece,
-} from '../../interfaces/ludoboard.interfaces';
+} from '../interfaces/ludo-board.interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { 
   TurnOrder,

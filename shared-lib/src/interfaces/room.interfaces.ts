@@ -7,16 +7,13 @@ export interface IRoomPlayer {
   playerName?: string;
 }
 
-export interface IPlayers {
-  socketId: string;
-  playerName?: string;
-  color?: string;
-}
+// Alias
+export type IPlayers = IRoomPlayer;
 
 // Game room interface
 export interface IGameRoom {
   roomId: string;
-  players: IPlayers[];
+  players: IRoomPlayer[];
   maxPlayers: number;
   currentPlayers: number;
   gameStarted: boolean;

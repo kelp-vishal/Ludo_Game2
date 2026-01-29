@@ -2,6 +2,9 @@
   text-align: center;
   padding: var(--spacing-50);
   min-height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 
   h2 {
     margin-bottom: var(--spacing-20);
@@ -9,23 +12,14 @@
   }
 
   h3 {
-    font-size: var(--font-size-24);
     margin-bottom: var(--spacing-15);
     color: var(--text-green);
   }
 }
 
-/* Global h2 */
-h2 {
-  font-size: var(--font-size-36);
-  font-weight: var(--font-weight-500);
-}
-
 .connection-status {
   margin-bottom: var(--spacing-20);
-  font-size: var(--font-size-18);
   padding: var(--spacing-10);
-  font-weight: var(--font-weight-800);
   border-radius: 5px;
 
   &.success {
@@ -41,7 +35,7 @@ h2 {
 
 /* Menu View */
 .menu-view {
-  max-width: var(--spacing-500);
+  max-width: var(--width-500);
   margin: 0 auto;
 }
 
@@ -54,7 +48,7 @@ h2 {
 
 /* Create Room View */
 .create-room-view {
-  max-width: var(--spacing-500);
+  max-width: var(--width-500);
   margin: 0 auto;
   background: var(--bg-very-light);
   padding: var(--spacing-30);
@@ -69,7 +63,7 @@ h2 {
 
 /* Join Room View */
 .join-room-view {
-  max-width: 700px;
+  max-width: var(--width-600);
   margin: 0 auto;
   background: var(--bg-light);
   padding: var(--spacing-30);
@@ -90,7 +84,6 @@ h2 {
   label {
     display: block;
     margin-bottom: var(--spacing-8);
-    font-weight: bold;
     color: var(--text-dark);
   }
 }
@@ -98,7 +91,6 @@ h2 {
 .input-field {
   width: 100%;
   padding: var(--spacing-10);
-  font-size: var(--font-size-18);
   border: 2px solid var(--text-light);
   border-radius: var(--radius-6);
   box-sizing: border-box;
@@ -122,7 +114,6 @@ h2 {
   padding: var(--spacing-10) var(--spacing-20);
   background-color: var(--bg-light);
   border: var(--border-2) var(--text-light);
-  font-weight: var(--font-weight-800);
   border-radius: var(--radius-6);
   cursor: pointer;
   transition: all 0.3s;
@@ -175,12 +166,10 @@ h2 {
 
   p {
     margin: var(--spacing-5) 0;
-    font-size: var(--font-size-14);
   }
 }
 
 .player-info {
-  font-size: var(--font-size-12);
   color: var(--text-light);
   margin-left: var(--spacing-10);
 }
@@ -190,12 +179,10 @@ h2 {
 .btn-success,
 .btn-secondary {
   padding: var(--spacing-12) var(--spacing-30);
-  font-size: var(--font-size-18);
   border: none;
   border-radius:var(--radius-6);
   cursor: pointer;
   transition: all 0.3s;
-  font-weight: bold;
 }
 
 .btn-primary {
@@ -258,7 +245,6 @@ h2 {
     display: block;
     margin: var(--spacing-20) auto;
     padding: var(--spacing-15) var(--spacing-30);
-    font-size: var(--font-size-18);
     background-color: rgb(98, 111, 181);
     cursor: pointer;
     color: var(--text-light);

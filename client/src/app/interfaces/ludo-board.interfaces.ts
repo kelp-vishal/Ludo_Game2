@@ -1,9 +1,17 @@
+import { IPlayers } from './socket.interfaces';
+
 export interface IPiece {
   id: string;
   color: string;
   position: number;
   currentX: number;
   currentY: number;
+}
+
+export interface ILastMove {
+  pieceId: string;
+  fromPos: number;
+  toPos: number;
 }
 
 export interface IGameState {
@@ -19,7 +27,7 @@ export interface IGameState {
 
 export interface IAvailableRoom {
   roomId: string;
-  players: Array<{ socketId: string; color?: string; playerName?: string }>;
+  players: IPlayers[];
   maxPlayers: number;
   currentPlayers: number;
   gameStarted: boolean;
@@ -30,9 +38,5 @@ export interface IGameStateUpdate {
   pieces: { [pieceId: string]: number };
   movablePieces: string[];
   timestamp: Date;
-  lastMove?: {
-    pieceId: string;
-    fromPos: number;
-    toPos: number;
-  };
+  lastMove?: ILastMove;
 }

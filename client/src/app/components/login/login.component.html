@@ -3,16 +3,16 @@
 
   <div class="control-row">
     <div class="control no-margin">
-      <label for="username">Username</label>
+      <label for="username" class="text-sm text-weight-bold">Username</label>
       <input id="username" type="text" formControlName="username" />
     </div>
 
     <div class="control no-margin">
-      <label for="password">Password</label>
+      <label for="password" class="text-sm text-weight-bold">Password</label>
       <input id="password" type="password" formControlName="password" />
     </div>
 
-    <button class="button" type="submit" [disabled]="isLoading">
+    <button class="button text-base" type="submit" [disabled]="isLoading">
       {{ isLoading ? "Logging in..." : "Login" }}
     </button>
   </div>

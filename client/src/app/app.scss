@@ -23,11 +23,9 @@ fieldset {
 
 .control label {
   display: block;
-  font-size: 0.8rem;
   margin-bottom: 0.2rem;
   color: var(--text-light);
   text-transform: uppercase;
-  font-weight: bold;
 }
 
 .control input {
@@ -35,7 +33,6 @@ fieldset {
   width: 100%;
   max-width: 15rem;
   padding: 0.5rem;
-  font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #758a8a;
   background-color: var(--bg-form-button);
@@ -47,7 +44,6 @@ fieldset {
   width: 100%;
   max-width: 15rem;
   padding: 0.5rem;
-  font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #758a8a;
   background-color: var(--bg-form-button);
@@ -114,7 +110,6 @@ hr {
 
 .button {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
   border-radius: 4px;
   border: none;
   background-color: var(--bg-form-button-light);

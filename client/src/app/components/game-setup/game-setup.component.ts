@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../services/game.service';
-import { RoomService, GameRoom } from '../services/room.service';
-import { SocketService } from '../services/socket.service';
+import { GameService } from '../../services/game.service';
+import { RoomService, GameRoom } from '../../services/room.service';
+import { SocketService } from '../../services/socket.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IAvailableRoom } from '../../interfaces/ludoboard.interfaces';
+import { IAvailableRoom } from '../../interfaces/ludo-board.interfaces';
 import { TurnOrder } from '@ludo-game/shared-lib';
 @Component({
   selector: 'app-game-setup',

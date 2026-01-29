@@ -1,39 +1,46 @@
 <div class="game-container">
   <div class="ludo-board">
+    <!-- Board -->
     <div
-      class="cell"
       *ngFor="let cell of gridCells; let i = index"
+      class="cell path"
       [style.grid-column]="(i % 15) + 1"
       [style.grid-row]="Math.floor(i / 15) + 1"
-      [class.home-red]="isRedHome(i)"
-      [class.home-yellow]="isYellowHome(i)"
-      [class.home-green]="isGreenHome(i)"
-      [class.home-blue]="isBlueHome(i)"
-      [class.border-red]="isRedBorder(i)"
-      [class.border-green]="isGreenBorder(i)"
-      [class.border-blue]="isBlueBorder(i)"
-      [class.border-yellow]="isYellowBorder(i)"
-      [class.Base-All]="isBaseAll(i)"
-      [class.red-path]="isRedPath(i)"
-      [class.yellow-path]="isYellowPath(i)"
-      [class.blue-path]="isBluePath(i)"
-      [class.green-path]="isGreenPath(i)"
-      [class.safe-zone]="isSafeZone(i)"
-      [class.finish-zone]="isFinishZone(i)"
-      [class.path]="true"
+      [ngClass]="{
+        'home-red': isRedHome(i),
+        'home-yellow': isYellowHome(i),
+        'home-green': isGreenHome(i),
+        'home-blue': isBlueHome(i),
+
+        'border-red': isRedBorder(i),
+        'border-green': isGreenBorder(i),
+        'border-blue': isBlueBorder(i),
+        'border-yellow': isYellowBorder(i),
+
+        'Base-All': isBaseAll(i),
+
+        'red-path': isRedPath(i),
+        'yellow-path': isYellowPath(i),
+        'blue-path': isBluePath(i),
+        'green-path': isGreenPath(i),
+
+        'safe-zone': isSafeZone(i),
+        'finish-zone': isFinishZone(i),
+      }"
     ></div>
 
     <!-- Pieces -->
     <div
       *ngFor="let piece of pieces$ | async"
       class="piece"
-      [class.red]="piece.color === 'red'"
-      [class.yellow]="piece.color === 'yellow'"
-      [class.blue]="piece.color === 'blue'"
-      [class.green]="piece.color === 'green'"
-      [class.movable]="
-        isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id)
-      "
+      [ngClass]="{
+        red: piece.color === 'red',
+        yellow: piece.color === 'yellow',
+        blue: piece.color === 'blue',
+        green: piece.color === 'green',
+        movable:
+          isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id),
+      }"
       [style.left.px]="piece.currentX + getPieceOffset(piece).x"
       [style.top.px]="piece.currentY + getPieceOffset(piece).y"
       [style.transform]="'scale(' + getPieceScale(piece) + ')'"
@@ -42,21 +49,27 @@
     ></div>
   </div>
 
+  <!-- Dice -->
   <div
     class="dice-button"
-    [class.Red-Turn]="IsRedTurn()"
-    [class.Blue-Turn]="IsBlueTurn()"
-    [class.Yellow-Turn]="IsYellowTurn()"
-    [class.Green-Turn]="IsGreenTurn()"
+    [ngClass]="{
+      'Red-Turn': IsRedTurn(),
+      'Blue-Turn': IsBlueTurn(),
+      'Yellow-Turn': IsYellowTurn(),
+      'Green-Turn': IsGreenTurn(),
+    }"
   >
-    <div class="turn-info">{{ getCurrentPlayerName() }}'s Turn</div>
+    <div class="turn-info text-bold-large">
+      {{ getCurrentPlayerName() }}'s Turn
+    </div>
 
+    <!-- Dice -->
     <div
       class="dice-container"
       (click)="rollDice()"
-      [class.disabled]="
-        !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon()
-      "
+      [ngClass]="{
+        disabled: !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon(),
+      }"
       [style.pointer-events]="
         !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon()
           ? 'none'
@@ -75,7 +88,7 @@
     >
       <div
         class="dice"
-        [class.rolling]="isRolling"
+        [ngClass]="{ rolling: isRolling }"
         [attr.data-value]="gameState?.diceValue || 1"
       >
         <!-- Face 1 -->
@@ -89,14 +102,14 @@
           <span class="dot" style="grid-area: g"></span>
         </div>
 
-        <!-- Face 3 -rigth -->
+        <!-- Face 3 -->
         <div class="face left">
           <span class="dot"></span>
           <span class="dot" style="grid-area: d"></span>
           <span class="dot" style="grid-area: g"></span>
         </div>
 
-        <!-- Face 4-left-->
+        <!-- Face 4 -->
         <div class="face right">
           <span class="dot"></span>
           <span class="dot"></span>
@@ -104,7 +117,7 @@
           <span class="dot" style="grid-area: g"></span>
         </div>
 
-        <!-- Face 5-top -->
+        <!-- Face 5 -->
         <div class="face top">
           <span class="dot"></span>
           <span class="dot"></span>
@@ -113,7 +126,7 @@
           <span class="dot" style="grid-area: g"></span>
         </div>
 
-        <!-- Face 6-bottom -->
+        <!-- Face 6 -->
         <div class="face bottom">
           <span class="dot"></span>
           <span class="dot"></span>
@@ -125,16 +138,18 @@
       </div>
     </div>
 
-    <div class="dice-instruction">
+    <!-- Dice Text -->
+    <div class="dice-instruction text-size-14 text-weight-400">
       {{
         (gameState?.diceValue || 0) > 0
-          ? "Select a piece to move"
-          : "Click dice to roll"
+          ? 'Select a piece to move'
+          : 'Click dice to roll'
       }}
     </div>
 
-    <div *ngIf="isGameWon()" class="win-message">
-      \n {{ gameState?.gameWon }} WINS!!
+    <!-- Win Message -->
+    <div *ngIf="isGameWon()" class="win-message text-size-24 text-weight-bold">
+      {{ gameState?.gameWon }} WINS!!
     </div>
   </div>
 </div>

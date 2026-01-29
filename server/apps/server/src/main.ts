@@ -12,6 +12,9 @@ async function bootstrap(): Promise<void> {
   const port = configService.get<number>('PORT') || 3002;
   const frontendLocal = configService.get<string>('FRONTEND_LOCAL');
 
+  // Set global prefix for all routes
+  app.setGlobalPrefix('api');
+
   // Enable validation globally
   app.useGlobalPipes(
     new ValidationPipe({
@@ -22,12 +25,12 @@ async function bootstrap(): Promise<void> {
   );
 
   // Enable CORS
-  app.enableCors({
-    origin: [frontendLocal],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-  });
+  // app.enableCors({
+  //   origin: [frontendLocal],
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  //   allowedHeaders: ['Content-Type', 'Authorization'],
+  //   credentials: true,
+  // });
 
   // Swagger doc
   const config = new DocumentBuilder()

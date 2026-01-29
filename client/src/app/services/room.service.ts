@@ -32,15 +32,15 @@ export class RoomService {
 
   private setupSocketListeners(): void {
     this.socketService.currentRoom$.subscribe((room) => {
-      this.currentRoomSubject.next(room as GameRoom | null);
+      this.currentRoomSubject.next(room);
     });
 
     this.socketService.playersInRoom$.subscribe((players) => {
-      this.playersSubject.next(players as IRoomPlayer[]);
+      this.playersSubject.next(players);
     });
 
     this.socketService.rooms$.subscribe((rooms) => {
-      this.availableRoomsSubject.next(rooms as GameRoom[]);
+      this.availableRoomsSubject.next(rooms);
     });
   }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SocketService } from '../services/socket.service';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-room-connect-generate',

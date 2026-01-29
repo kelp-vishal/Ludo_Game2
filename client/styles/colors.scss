@@ -3,64 +3,75 @@
 
   //Text color
   --text-light: #ffffff;
-  --text-dark:rgb(13, 6, 6);
-  --text-green:#46d30a;
-  --text-voilet:#667eea;
-  --text-orange:#ca571d;
-  --text-aqua:#1a9ac4;
-  --text-pink:rgb(210, 63, 243);
+  --text-dark: rgb(13, 6, 6);
+  --text-green: #46d30a;
+  --text-voilet: #667eea;
+  --text-orange: #ca571d;
+  --text-aqua: #1a9ac4;
+  --text-pink: rgb(210, 63, 243);
 
   // Background Colors
-  --bg-voilet:rgb(37, 106, 224);
-  --bg-light:rgb(255, 255, 255);
+  --bg-voilet: rgb(37, 106, 224);
+  --bg-light: rgb(255, 255, 255);
   --bg-root: linear-gradient(130deg, rgb(0, 96, 83), rgb(0, 0, 194));
   --bg-very-light: #f8f9fa;
 
   --bg-form: linear-gradient(180deg, #253c3c, #1d4949);
+  --bg-login-si:linear-gradient(180deg, #1d3ca3, #051667);
   --bg-form-button-light: #147b73;
   --bg-form-button-dark: #319890;
   --bg-form-button: #9cbaba;
+  --bg-form-input: #869999;
+  --bg-form-input-focus: #a1b4b4;
 
-  --sidebar-bg:  rgb(2, 19, 170);
+  --text-form-label: #9bafaf;
+  --text-form-input: #142020;
+  --text-form-heading: #d9e2f1;
+  --text-form-error: #ffca99;
+  --text-form-success: #4caf50;
+  --text-error-red: #f44336;
+  
+  --border-form-input: #758a8a;
+  --border-form-input-focus: #147b73;
+
+  --sidebar-bg: rgb(2, 19, 170);
   --link-color: #0b3a4a;
-  --bg-sidebar:rgb(2, 19, 170);
-  --bg-sidebar-a-hover:rgba(255, 255, 255, 0.08);
+  --bg-sidebar: rgb(2, 19, 170);
+  --bg-sidebar-a-hover: rgba(255, 255, 255, 0.08);
 
-  --bg-home-h1 :#1a9ac4;
+  --bg-home-h1: #1a9ac4;
   --bg-home-button: linear-gradient(45deg, #ff0000, #fffb00, #48ff00, #002bff);
 
-  --bg-status-success :#46d30a;
-  --bg-status-warning:#ff9800;
+  --bg-status-success: #46d30a;
+  --bg-status-warning: #ff9800;
 
-  --bg-create-join-room:rgba(255, 255, 255, 0.95);
-    --bg-player-btn:#e0e0e0;
+  --bg-create-join-room: rgba(255, 255, 255, 0.95);
+  --bg-player-btn: #e0e0e0;
 
-    // Ludo-Board
-    --bg-ludo-board:#ecf0f1;
-    --bg-cell:#fff;
-    --bg-home-red:rgba(242, 88, 88, 0.4);
-    --bg-home-yellow:rgba(244, 242, 84, 0.4);
-    --bg-home-green:rgb(94, 240, 94);
-    --bg-home-blue:rgba(56, 190, 248, 0.4);
+  // Ludo-Board
+  --bg-ludo-board: #ecf0f1;
+  --bg-cell: #fff;
+  --bg-home-red: rgba(242, 88, 88, 0.4);
+  --bg-home-yellow: rgba(244, 242, 84, 0.4);
+  --bg-home-green: rgb(94, 240, 94);
+  --bg-home-blue: rgba(56, 190, 248, 0.4);
 
-    --bg-Border-red:#d50000;
-    --bg-Border-yellow:rgb(199, 199, 0);
-    --bg-Border-blue:rgb(4, 67, 225);
-    --bg-Border-green:rgb(4, 193, 1);
+  --bg-Border-red: #d50000;
+  --bg-Border-yellow: rgb(199, 199, 0);
+  --bg-Border-blue: rgb(4, 67, 225);
+  --bg-Border-green: rgb(4, 193, 1);
 
-    --bg-dice-face: linear-gradient(145deg, #ffefcb 0%, #a5a467 100%);
-    --bg-dice-dot:radial-gradient(circle, #1a1a1a 40%, #000 100%);
+  --bg-dice-face: linear-gradient(145deg, #ffefcb 0%, #a5a467 100%);
+  --bg-dice-dot: radial-gradient(circle, #1a1a1a 40%, #000 100%);
 
-    --bg-rollButton-disable:linear-gradient(135deg, #5dade2, #3498db);
-    --bg-dice-disable:linear-gradient(135deg, #7f8c8d, #789b9e);
+  --bg-rollButton-disable: linear-gradient(135deg, #5dade2, #3498db);
+  --bg-dice-disable: linear-gradient(135deg, #7f8c8d, #789b9e);
 
-    --bg-finish-zone:rgba(251, 0, 239, 0.2);
-    --bg-room-coonect:rgb(190, 203, 249);
-
-
+  --bg-finish-zone: rgba(251, 0, 239, 0.2);
+  --bg-room-coonect: rgb(190, 203, 249);
 
   //Border
   --border-input-field: #667eea;
 
-  --token-color:#d50000;
+  --token-color: #d50000;
 }

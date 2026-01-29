@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
-import { IRoom } from '../../interfaces/socket.interfaces';
-import { environment } from '../../../environments/environment';
-import { IGameState } from '../../interfaces/ludoboard.interfaces';
-import { IRemoteGameState, IGameStateUpdate } from '@ludo-game/shared-lib';
+import { IRoom } from '../interfaces/socket.interfaces';
+import { environment } from '../../environments/environment';
+import { IGameState } from '../interfaces/ludo-board.interfaces';
+import { IRemoteGameState, IGameStateUpdate, IRoomPlayer } from '@ludo-game/shared-lib';
 
 @Injectable({ providedIn: 'root' })
 export class SocketService {
@@ -15,9 +15,7 @@ export class SocketService {
   private socketIdSubject = new BehaviorSubject<string>('');
   private roomsSubject = new BehaviorSubject<IRoom[]>([]);
   private currentRoomSubject = new BehaviorSubject<IRoom | null>(null);
-  private playersInRoomSubject = new BehaviorSubject<
-    Array<{ socketId: string; color?: string }>
-  >([]);
+  private playersInRoomSubject = new BehaviorSubject<IRoomPlayer[]>([]);
   private gameStateSubject = new BehaviorSubject<IGameState | null>(null);
   private gameStartedSubject = new BehaviorSubject<IGameState | null>(null);
   private gameEndedSubject = new BehaviorSubject<any | null>(null);

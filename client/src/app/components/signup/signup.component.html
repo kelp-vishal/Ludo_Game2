@@ -3,7 +3,7 @@
   <p>We just need a little bit of data from you to get you started</p>
 
   <div class="control">
-    <label for="username">Username</label>
+    <label for="username" class="text-sm text-weight-bold">Username</label>
     <input id="username" type="text" formControlName="username" />
     @if (usernameInvalid) {
       <p class="control-error">Username must be at least 3 characters</p>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="control">
-    <label for="email">Email</label>
+    <label for="email" class="text-sm text-weight-bold">Email</label>
     <input id="email" type="email" formControlName="email" />
     @if (emailInvalid) {
       <p class="control-error">Please enter a valid email address</p>
@@ -20,7 +20,7 @@
 
   <div class="control-row">
     <div class="control">
-      <label for="password">Password</label>
+      <label for="password" class="text-sm text-weight-bold">Password</label>
       <input id="password" type="password" formControlName="password" />
       @if (passwordInvalid) {
         <p class="control-error">Password must be at least 6 characters</p>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="control">
-      <label for="confirm-password">Confirm Password</label>
+      <label for="confirm-password" class="text-sm text-weight-bold">Confirm Password</label>
       <input
         id="confirm-password"
         type="password"
@@ -54,13 +54,13 @@
   <p class="form-actions">
     <button
       type="button"
-      class="button button-flat"
+      class="button button-flat text-base"
       (click)="onReset()"
       [disabled]="isLoading"
     >
       Reset
     </button>
-    <button type="submit" class="button" [disabled]="isLoading">
+    <button type="submit" class="button text-base" [disabled]="isLoading">
       {{ isLoading ? "Creating account..." : "Sign up" }}
     </button>
   </p>

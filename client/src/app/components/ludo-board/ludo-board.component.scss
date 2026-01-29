@@ -18,8 +18,8 @@
 }
 
 .ludo-board {
-  width: min(600px, 95vw);
-  height: min(600px, 95vw);
+  width: min(var(--width-600), 95vw);
+  height: min(var(--height-600), 95vw);
   max-width:var(--width-600);
   max-height: var(--height-600);
   display: grid;
@@ -369,20 +369,15 @@
 .turn-info,
 .dice-value {
   margin: var(--spacing-8) 0;
-  font-weight: var(--font-weight-600);
   text-align: center;
 }
 
 .turn-info {
-  font-size: var(--font-size-20);
   color: var(--text-dark);
-  font-weight: var(--font-weight-700);
 }
 .dice-value {
-  font-size: var(--font-size-14);
   margin-bottom: var(--spacing-12);
   color: var(--text-orange);
-  font-weight: var(--font-weight-400);
 }
 
 .win-message {
@@ -390,8 +385,6 @@
   padding: var(--spacing-16);
   background: var(--bg-Border-yellow);
   border-radius: 8px;
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-700);
   color: rgba(var(--text-dark));
   text-align: center;
   animation: celebrate 0.5s ease infinite alternate;
@@ -408,8 +401,6 @@
 
 .roll-btn {
   padding: var(--spacing-16) var(--spacing-32);
-  font-size: var(--font-size-20);
-  font-weight: bold;
   background: linear-gradient(
     135deg,
     var(--accent-color),
@@ -517,13 +508,11 @@
   background: var(--text-light);
   padding: var(--spacing-15) var(--spacing-30);
   border-radius: var(--radius-12);
-  font-size: var(--font-size-18);
   color: var(--text-dark);
   box-shadow: 0 var(--spacing-4) var(--spacing-16) rgba(0, 0, 0, 0.1);
   text-align: center;
 
   p {
     margin: 0;
-    font-weight:var(--font-weight-500);
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IPiece } from '../../interfaces/ludoboard.interfaces';
-import { IGameState } from '../../interfaces/ludoboard.interfaces';
-import { GameService } from '../services/game.service';
-import { SocketService } from '../services/socket.service';
-import { RoomService } from '../services/room.service';
+import { IPiece } from '../../interfaces/ludo-board.interfaces';
+import { IGameState } from '../../interfaces/ludo-board.interfaces';
+import { GameService } from '../../services/game.service';
+import { SocketService } from '../../services/socket.service';
+import { RoomService } from '../../services/room.service';
 import { Subscription } from 'rxjs';
 import { IGameStateUpdate } from '@ludo-game/shared-lib';
 

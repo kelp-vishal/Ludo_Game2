@@ -1,18 +1,18 @@
 :root {
-  --fs-lg: 20px;
-
-  --fw-semibold: 600;
-  --fw-bold: 700;
-
   --font-size-12: 12px;
-  --font-size-20: 20px;
   --font-size-14: 14px;
+  --font-size-16: 16px;
   --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
   --font-size-28: 28px;
+  --font-size-36: 36px;
   --font-size-40: 40px;
   --font-size-48: 48px;
-  --font-size-24: 24px;
-  --font-size-36: 36px;
+  
+  --font-size-sm: 0.8rem;
+  --font-size-base: 1rem;
+  --font-size-md: 0.9rem;
 
   --font-weight-100: 100;
   --font-weight-200: 200;
@@ -25,4 +25,82 @@
 
   --font-family-mono: "Courier New", Courier, monospace;
   --font-family-time: "Times New Roman", Times, serif;
+}
+
+.text-bold-large {
+  font-size: 20px;   
+  font-weight: 700;
+}
+
+.text-larger-h1 {
+  font-size: 48px;
+  font-family: var(--font-family-time);
+}
+
+.text-larger-p {
+  font-size: 20px;
+  font-family: var(--font-family-time);
+}
+
+.text-large-button {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.text-bold-l {
+  font-weight: 500;
+  font-size: 36px;
+}
+
+.text-size-12 {
+  font-size: 12px;
+}
+
+.text-size-14 {
+  font-size: 14px;
+}
+
+.text-size-18 {
+  font-size: 18px;
+}
+
+.text-size-24 {
+  font-size: 24px;
+}
+
+.text-weight-bold {
+  font-weight: bold;
+}
+
+.text-weight-400 {
+  font-weight: 400;
+}
+
+.text-weight-500 {
+  font-weight: 500;
+}
+
+.text-weight-600 {
+  font-weight: 600;
+}
+
+.text-weight-700 {
+  font-weight: 700;
+}
+
+.text-sm {
+  font-size: 0.8rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: large;
+  font-weight: 500;
+}
+
+.text-family-mono {
+  font-family: var(--font-family-mono);
 }

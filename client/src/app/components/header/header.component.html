@@ -1,9 +1,8 @@
 <nav class="sidebar">
-  <div class="brand">Ludo</div>
+  <div class="brand text-bold-large">Ludo</div>
   <ul>
     <li><a href="/">Home</a></li>
-    <li><a (click)="startGame()" style="cursor: pointer">Play</a></li>
-    <li><a href="/">About</a></li>
+    <li><a (click)="startGame()">Play</a></li>
 
     <!-- Show when NOT logged in -->
     <ng-container *ngIf="!isLoggedIn">
@@ -14,9 +13,9 @@
     <!-- Show when logged in -->
     <ng-container *ngIf="isLoggedIn">
       <li>
-        <a style="color: #4caf50">{{ username }}</a>
+        <a class="username">{{ username }}</a>
       </li>
-      <li><a (click)="logout()" style="cursor: pointer">Logout</a></li>
+      <li><a (click)="logout()">Logout</a></li>
     </ng-container>
   </ul>
 </nav>

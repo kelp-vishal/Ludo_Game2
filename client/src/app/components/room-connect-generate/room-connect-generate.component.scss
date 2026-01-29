@@ -25,7 +25,6 @@
 
 .createRoom h1,
 .joinRoom h1 {
-  font-size: var(--font-24, 24px);
   margin-bottom: var(--spacing-20);
 }
 
@@ -44,17 +43,14 @@ input {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: var(--font-large);
   gap: var(--spacing-50);
   margin-top: var(--spacing-20);
   margin-bottom: var(--spacing-20);
-  font-weight: bold;
 }
 
 .local-btn {
   margin-top: var(--spacing-20);
   padding: var(--spacing-10) var(--spacing-20);
-  font-size: var(--font-18, 18px);
   background-color: var(--bg-Border-green);
   color: var(--text-dark);
   border: none;

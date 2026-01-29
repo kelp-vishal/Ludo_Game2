@@ -22,7 +22,7 @@ export class AuthService {
   LoginResponse: ILoginResponse[] = [];
   RegisterResponse: IRegisterResponse[] = [];
 
-  private apiUrl = 'http://localhost:3002/auth';
+  private apiUrl = "/api/auth";
   private currentUserSubject = new BehaviorSubject<IUser | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
   private isBrowser: boolean;
