@@ -156,7 +156,7 @@
 
   &:hover {
     background-color: var(--bg-light);
-    box-shadow: 0 2px 8px var(--shadow-rgba-light);
+    box-shadow: 0 var(--spacing-2) var(--spacing-8) var(--shadow-rgba-light);
   }
 }
 

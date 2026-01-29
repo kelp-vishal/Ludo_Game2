@@ -29,7 +29,7 @@
   border: var(--border-1) var(--text-dark);
   position: relative;
   background: var(--bg-light);
-  box-shadow: 0 16px 64px var(--text-dark);
+  box-shadow: 0 var(--spacing-16) var(--spacing-64) var(--text-dark);
   border-radius: var(--redius-8);
 
   @media (max-width: 768px) {
@@ -121,9 +121,9 @@
     border-radius: 50%;
     border: var(--border-2) rgba(var(--text-dark), 0.3);
     box-shadow:
-      0 3px 6px rgba(var(--text-dark), 0.4),
-      inset -2px -2px 4px rgba(var(--text-dark), 0.2),
-      inset 2px 2px 4px var(--shadow-rgba-03);
+      0 var(--spacing-3) var(--spacing-6) rgba(var(--text-dark), 0.4),
+      inset var(--spacing-n2) var(--spacing-n2) var(--spacing-4) rgba(var(--text-dark), 0.2),
+      inset var(--spacing-2) var(--spacing-2) var(--spacing-4) var(--shadow-rgba-03);
   }
 
   &::after {
@@ -144,9 +144,9 @@
     border-radius: 50%;
     border: var(--border-2) var(--shadow-dark-025);
     box-shadow:
-      0 2px 4px var(--shadow-dark-03),
-      inset -1px -1px 2px var(--shadow-dark-02),
-      inset 1px 1px 2px var(--shadow-rgba-04);
+      0 var(--spacing-2) var(--spacing-4) var(--shadow-dark-03),
+      inset var(--spacing-n1) var(--spacing-n1) var(--spacing-2) var(--shadow-dark-02),
+      inset var(--spacing-1) var(--spacing-1) var(--spacing-2) var(--shadow-rgba-04);
   }
 
   &.red {
@@ -179,15 +179,15 @@
   100% {
     transform: scale(1);
     box-shadow:
-      0 0 11px 3px var(--bg-Border-yellow),
-      0 0 1px 3px var(--shadow-gold-04);
+      0 0 var(--spacing-11) var(--spacing-3) var(--bg-Border-yellow),
+      0 0 var(--spacing-1) var(--spacing-3) var(--shadow-gold-04);
     border-radius: 50%;
   }
   50% {
     transform: scale(1.3);
     box-shadow:
-      0 0 1px 2px rgb(250, 224, 144),
-      0 0 1px 2px var(--shadow-gold-04);
+      0 0 var(--spacing-1) var(--spacing-2) rgb(250, 224, 144),
+      0 0 var(--spacing-1) var(--spacing-2) var(--shadow-gold-04);
   }
 }
 
@@ -214,7 +214,7 @@
   padding: var(--spacing-32);
   border-radius: var(--radius-16);
   color: var(--text-dark);
-  box-shadow: 0 8px 32px var(--shadow-dark-02);
+  box-shadow: 0 var(--spacing-8) var(--spacing-32) var(--shadow-dark-02);
   min-width: var(--width-280);
 
   @media (max-width: 1024px) {
@@ -291,9 +291,9 @@
     grid-template-areas: "a . b" "c d e" "f . g";
     padding: var(--spacing-10);
     box-shadow:
-      inset 0 5px 10px var(--shadow-white-09),
-      inset 0 -5px 10px var(--shadow-dark-015),
-      0 5px 15px var(--shadow-dark-03);
+      inset 0 var(--spacing-5) var(--spacing-10) var(--shadow-white-09),
+      inset 0 var(--spacing-n5) var(--spacing-10) var(--shadow-dark-015),
+      0 var(--spacing-5) var(--spacing-15) var(--shadow-dark-03);
 
     &.front {
       transform: translateZ(var(--spacing-50));
@@ -434,7 +434,7 @@
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--shadow-blue-06);
+    box-shadow: 0 var(--spacing-6) var(--spacing-20) var(--shadow-blue-06);
     background: var(--bg-rollButton-disable);
   }
 

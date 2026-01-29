@@ -1,10 +1,14 @@
 :root {
   // Spacing (px)
+  --spacing-1: 1px;
   --spacing-2: 2px;
+  --spacing-3: 3px;
   --spacing-4: 4px; 
+  --spacing-5: 5px;
   --spacing-6: 6px;
   --spacing-8: 8px;
   --spacing-10: 10px;
+  --spacing-11: 11px;
   --spacing-12: 12px;
   --spacing-14: 14px;
   --spacing-15: 15px;
@@ -32,6 +36,9 @@
   --spacing-1000: 1000px;
   
   // Negative spacing
+  --spacing-n1: -1px;
+  --spacing-n2: -2px;
+  --spacing-n5: -5px;
   --spacing-n8: -8px;
 
   --radius-6: 6px;
