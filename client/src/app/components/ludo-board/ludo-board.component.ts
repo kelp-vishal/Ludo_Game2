@@ -1,5 +1,6 @@
 import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { IPiece } from '../../interfaces/ludo-board.interfaces';
 import { IGameState, IGameStateUpdate } from '@ludo-game/shared-lib';
 import { GameService } from '../../services/game.service';
@@ -25,6 +26,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
   gameService = inject(GameService);
   socketService = inject(SocketService);
   roomService = inject(RoomService);
+  router = inject(Router);
 
   pieces$ = this.gameService.pieces$;
   currentRoom$ = this.roomService.currentRoom$;
@@ -81,8 +83,18 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
     // Subscribe to player-left event during active game
     const playerLeftSubscription = this.socketService.playerLeft$.subscribe(
-      (data: { playerColor: string; playerName: string; }) => {
-        if (data && data.playerColor && this.gameState) {
+      (data: { playerColor?: string; playerName?: string; gameEnded?: boolean }) => {
+        if (!data) return;
+
+        // Check if game ended because player left
+        if (data.gameEnded) {
+          alert(`${data.playerName || 'A player'} left and no sufficient players left to play. Returning to home...`);
+          this.router.navigate(['/']);
+          return;
+        }
+
+        // Handle player leaving during active game (but game continues)
+        if (data.playerColor && this.gameState) {
           // Remove disconnected player from active players
           this.gameState.activePlayers = this.gameState.activePlayers.filter(
             (color) => color !== data.playerColor
@@ -90,7 +102,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
           // Remove all their pieces from the board
           Object.keys(this.gameState.pieces).forEach((pieceId) => {
-            if (pieceId.startsWith(data.playerColor)) {
+            if (pieceId.startsWith(data.playerColor!)) {
               delete this.gameState!.pieces[pieceId];
             }
           });
@@ -119,6 +131,8 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
+    // Clear the player-left state to prevent stale alerts on next game
+    this.socketService.clearPlayerLeftState();
   }
 
   syncGameStateWithOthers(
@@ -456,6 +470,19 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
       return true;
     } else {
       return false;
+    }
+  }
+
+  leaveRoom(): void {
+    if (confirm('Are you sure you want to leave the room?')) {
+      // Unsubscribe from all subscriptions to prevent getting the alert
+      this.subscriptions.forEach((sub) => sub.unsubscribe());
+      // Clear player-left state so we don't see our own leave notification
+      this.socketService.clearPlayerLeftState();
+      // Emit leave room event to server
+      this.socketService.leaveRoom();
+      // Navigate to home
+      this.router.navigate(['/']);
     }
   }
 }

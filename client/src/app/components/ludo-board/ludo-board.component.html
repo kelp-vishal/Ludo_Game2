@@ -1,4 +1,9 @@
 <div class="game-container">
+  <!-- Leave Room Button -->
+  <button class="leave-room-btn" (click)="leaveRoom()" title="Leave Room">
+    Leave Room
+  </button>
+
   <div class="ludo-board">
     <!-- Board -->
     <div
@@ -30,23 +35,28 @@
     ></div>
 
     <!-- Pieces -->
-    <div
-      *ngFor="let piece of pieces$ | async"
-      class="piece"
-      [ngClass]="{
-        red: piece.color === 'red',
-        yellow: piece.color === 'yellow',
-        blue: piece.color === 'blue',
-        green: piece.color === 'green',
-        movable:
-          isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id),
-      }"
-      [style.left.px]="piece.currentX + getPieceOffset(piece).x"
-      [style.top.px]="piece.currentY + getPieceOffset(piece).y"
-      [style.transform]="'scale(' + getPieceScale(piece) + ')'"
-      (click)="selectPiece(piece.id)"
-      [attr.data-id]="piece.id"
-    ></div>
+    @for (piece of pieces$ | async; track piece.id) {
+      <div
+        class="piece"
+        [ngClass]="{
+          red: piece.color === 'red',
+          yellow: piece.color === 'yellow',
+          blue: piece.color === 'blue',
+          green: piece.color === 'green',
+          movable:
+            isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id),
+        }"
+        [style.left.px]="piece.currentX + getPieceOffset(piece).x"
+        [style.top.px]="piece.currentY + getPieceOffset(piece).y"
+        [style.transform]="'scale(' + getPieceScale(piece) + ')'"
+        (click)="selectPiece(piece.id)"
+        (keyup.enter)="selectPiece(piece.id)"
+        (keyup.space)="selectPiece(piece.id)"
+        [attr.tabindex]="isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id) ? 0 : -1"
+        [attr.data-id]="piece.id"
+        role="button"
+      ></div>
+    }
   </div>
 
   <!-- Dice -->
@@ -67,9 +77,13 @@
     <div
       class="dice-container"
       (click)="rollDice()"
+      (keyup.enter)="rollDice()"
+      (keyup.space)="rollDice()"
       [ngClass]="{
         disabled: !isMyTurn() || valueDice() > 1 || isGameWon(),
       }"
+      [attr.tabindex]="!isMyTurn() || valueDice() > 1 || isGameWon() ? -1 : 0"
+      role="button"
     >
       <div
         class="dice"
@@ -133,8 +147,10 @@
     </div>
 
     <!-- Win Message -->
-    <div *ngIf="isGameWon()" class="win-message text-size-24 text-weight-bold">
-      {{ gameState?.gameWon }} WINS!!
-    </div>
+    @if (isGameWon()) {
+      <div class="win-message text-size-24 text-weight-bold">
+        {{ gameState?.gameWon }} WINS!!
+      </div>
+    }
   </div>
 </div>

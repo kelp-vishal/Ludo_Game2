@@ -278,6 +278,10 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     const room = this.rooms.get(roomId);
     if (room) {
+      const leavingPlayer = room.players.find((p) => p.socketId === client.id);
+      const playerColor = leavingPlayer?.color;
+      const playerName = leavingPlayer?.playerName;
+
       room.players = room.players.filter((p) => p.socketId !== client.id);
       room.currentPlayers--;
 
@@ -288,17 +292,45 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
         this.roomColorIndex.delete(roomId);
         this.logger.log(`Room ${roomId} deleted (empty)`);
       } else {
-        // Transfer host if needed
-        if (room.hostSocketId === client.id) {
-          room.hostSocketId = room.players[0].socketId;
-        }
+        // If game has started and player leaves, end the game
+        if (room.gameStarted) {
+          this.logger.log(`Game ended in room ${roomId} - player left during game`);
+          
+          this.server.to(roomId).emit('player-left', {
+            roomId,
+            room,
+            message: `${playerName || 'Player'} left the game`,
+            playerColor: playerColor,
+            playerName: playerName,
+            gameEnded: true,
+          });
 
-        this.server.to(roomId).emit('player-left', {
-          roomId,
-          room,
-          message: `Player ${client.id} left the room`,
-          socketId: client.id,
-        });
+          // End the game
+          this.server.to(roomId).emit('game-ended', {
+            reason: `${playerName || 'Player'} left the game`,
+            winner: null,
+          });
+
+          // Delete the room since game is over
+          this.rooms.delete(roomId);
+          this.roomColorIndex.delete(roomId);
+          this.logger.log(`Room ${roomId} deleted (game ended due to player leaving)`);
+        } else {
+          // Game hasn't started yet, just remove player
+          // Transfer host if needed
+          if (room.hostSocketId === client.id) {
+            room.hostSocketId = room.players[0].socketId;
+          }
+
+          this.server.to(roomId).emit('player-left', {
+            roomId,
+            room,
+            message: `${playerName || 'Player'} left the room`,
+            socketId: client.id,
+            playerColor: playerColor,
+            playerName: playerName,
+          });
+        }
       }
     }
 

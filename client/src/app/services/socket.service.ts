@@ -80,14 +80,16 @@ export class SocketService {
       },
     );
 
-    this.socket.on('player-left', (data: { room: IGameRoom; message: string ,gameState?:IGameState;playerColor?: string}) => {
+    this.socket.on('player-left', (data: { room?: IGameRoom; message: string; gameState?: IGameState; playerColor?: string; playerName?: string; gameEnded?: boolean }) => {
+      // Always emit to playerLeftSubject so subscribers get notified
+      this.playerLeftSubject.next(data);
+
       if (data.room) {
         this.currentRoomSubject.next(data.room);
         this.playersInRoomSubject.next(data.room.players);
-
-        this.playerLeftSubject.next(data);
       }
-      if(data.gameState){
+      
+      if (data.gameState) {
         this.gameStateSubject.next(data.gameState);
       }
     });
@@ -169,6 +171,10 @@ export class SocketService {
     if (this.socket) {
       this.socket.removeAllListeners();
     }
+  }
+
+  clearPlayerLeftState(): void {
+    this.playerLeftSubject.next(null);
   }
 
   disconnect(): void {
