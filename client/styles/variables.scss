@@ -20,17 +20,26 @@
   --spacing-48: 48px;
   --spacing-50: 50px;
   --spacing-56: 56px;
+  --spacing-60: 60px;
   --spacing-64: 64px;
+  --spacing-70: 70px;
   --spacing-80: 80px;
   --spacing-100:100px;
   --spacing-200: 200px;
   --spacing-330: 330px;
   --spacing-500: 500px;
   --spacing-600 :600px;
+  --spacing-1000: 1000px;
+  
+  // Negative spacing
+  --spacing-n8: -8px;
 
-  --radius-6: 6px; 
+  --radius-6: 6px;
+  --radius-5: 5px;
   --radius-4: 4px;
   --radius-8:8px;
+  --radius-10: 10px;
+  --radius-14: 14px;
   --radius-16:16px;
   --radius-12:12px;
 
@@ -42,8 +51,29 @@
 
   /* Breakpoints */
   --bp-mobile: 500px;
+  
+  /* Transitions */
+  --transition-200: 0.2s;
+  --transition-300: 0.3s;
+  --transition-350: 0.35s;
+  --transition-600: 0.6s;
+  --transition-700: 0.7s;
+  
+  /* Animations */
+  --animation-800: 0.8s;
+  
+  /* Opacity */
+  --opacity-06: 0.6;
+  --opacity-05: 0.5;
+  --opacity-03: 0.3;
+  
+  /* Filters */
+  --filter-grayscale-03: grayscale(0.3);
+  
+  /* Transforms */
+  --scale-095: 0.95;
 
-  // width
+  // Width
   --width-600:600px;
   --width-640:640px;
   --width-400:400px;
@@ -61,6 +91,7 @@
   // height
   --height-600:600px;
   --height-400:400px;
+  --height-200:200px;
   --height-150:150px;
   --height-100:100px;
   --height-38:38px;
@@ -69,5 +100,10 @@
   --height-20:20px;
   --height-18:18px;
   --height-8:8px;
+  
+  // Widths for specific components
+  --room-width: 300px;
+  --room-height: 200px;
+  --max-width-1200: 1200px;
 
 }

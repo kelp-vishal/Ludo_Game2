@@ -8,7 +8,7 @@
   z-index: 1;
   margin: var(--spacing-80) auto var(--spacing-100);
   padding: 0 var(--spacing-20);
-  max-width: 1200px;
+  max-width: var(--max-width-1200);
 
   h1 {
     color: var(--text-aqua);

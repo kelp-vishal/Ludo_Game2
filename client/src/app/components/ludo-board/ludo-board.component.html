@@ -70,21 +70,6 @@
       [ngClass]="{
         disabled: !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon(),
       }"
-      [style.pointer-events]="
-        !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon()
-          ? 'none'
-          : 'auto'
-      "
-      [style.opacity]="
-        !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon()
-          ? '0.5'
-          : '1'
-      "
-      [style.cursor]="
-        isMyTurn() && (gameState?.diceValue || 0) === 0 && !isGameWon()
-          ? 'pointer'
-          : 'not-allowed'
-      "
     >
       <div
         class="dice"
@@ -93,47 +78,47 @@
       >
         <!-- Face 1 -->
         <div class="face front">
-          <span class="dot" style="grid-area: d"></span>
+          <span class="dot dot-center"></span>
         </div>
 
         <!-- Face 2 -->
         <div class="face back">
           <span class="dot"></span>
-          <span class="dot" style="grid-area: g"></span>
+          <span class="dot dot-bottom-right"></span>
         </div>
 
         <!-- Face 3 -->
         <div class="face left">
           <span class="dot"></span>
-          <span class="dot" style="grid-area: d"></span>
-          <span class="dot" style="grid-area: g"></span>
+          <span class="dot dot-center"></span>
+          <span class="dot dot-bottom-right"></span>
         </div>
 
         <!-- Face 4 -->
         <div class="face right">
           <span class="dot"></span>
           <span class="dot"></span>
-          <span class="dot" style="grid-area: f"></span>
-          <span class="dot" style="grid-area: g"></span>
+          <span class="dot dot-bottom-left"></span>
+          <span class="dot dot-bottom-right"></span>
         </div>
 
         <!-- Face 5 -->
         <div class="face top">
           <span class="dot"></span>
           <span class="dot"></span>
-          <span class="dot" style="grid-area: d"></span>
-          <span class="dot" style="grid-area: f"></span>
-          <span class="dot" style="grid-area: g"></span>
+          <span class="dot dot-center"></span>
+          <span class="dot dot-bottom-left"></span>
+          <span class="dot dot-bottom-right"></span>
         </div>
 
         <!-- Face 6 -->
         <div class="face bottom">
           <span class="dot"></span>
           <span class="dot"></span>
-          <span class="dot" style="grid-area: c"></span>
-          <span class="dot" style="grid-area: e"></span>
-          <span class="dot" style="grid-area: f"></span>
-          <span class="dot" style="grid-area: g"></span>
+          <span class="dot dot-middle-left"></span>
+          <span class="dot dot-middle-right"></span>
+          <span class="dot dot-bottom-left"></span>
+          <span class="dot dot-bottom-right"></span>
         </div>
       </div>
     </div>

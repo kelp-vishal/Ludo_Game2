@@ -3,7 +3,7 @@
   padding: var(--spacing-50);
   min-height: 100vh;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-width-1200);
   margin: 0 auto;
 
   h2 {
@@ -20,7 +20,7 @@
 .connection-status {
   margin-bottom: var(--spacing-20);
   padding: var(--spacing-10);
-  border-radius: 5px;
+  border-radius: var(--radius-5);
 
   &.success {
     background-color: var(--bg-status-success);
@@ -52,8 +52,8 @@
   margin: 0 auto;
   background: var(--bg-very-light);
   padding: var(--spacing-30);
-  border-radius: 10px;
-  box-shadow: 0 8px 32px var(--text-dark);
+  border-radius: var(--radius-10);
+  box-shadow: 0 var(--spacing-8) var(--spacing-32) var(--text-dark);
   color: var(--text-dark);
 
   h2 {
@@ -67,8 +67,8 @@
   margin: 0 auto;
   background: var(--bg-light);
   padding: var(--spacing-30);
-  border-radius: 10px;
-  box-shadow: 0 8px 32px var(--text-dark);
+  border-radius: var(--radius-10);
+  box-shadow: 0 var(--spacing-8) var(--spacing-32) var(--text-dark);
   color: var(--text-dark);
 
   h2 {
@@ -91,10 +91,10 @@
 .input-field {
   width: 100%;
   padding: var(--spacing-10);
-  border: 2px solid var(--text-light);
+  border: var(--border-2) var(--text-light);
   border-radius: var(--radius-6);
   box-sizing: border-box;
-  transition: border-color 0.3s;
+  transition: border-color var(--transition-300);
 
   &:focus {
     outline: none;
@@ -116,7 +116,7 @@
   border: var(--border-2) var(--text-light);
   border-radius: var(--radius-6);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all var(--transition-300);
 
   &.active {
     background-color: var(--bg--voilet);
@@ -152,11 +152,11 @@
   background-color: var(--bg-light);
   border-left: var(--border-4) var(--bg--voilet);
   border-radius: var(--radius-6);
-  transition: all 0.3s;
+  transition: all var(--transition-300);
 
   &:hover {
     background-color: var(--bg-light);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--shadow-rgba-light);
   }
 }
 
@@ -182,7 +182,7 @@
   border: none;
   border-radius:var(--radius-6);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all var(--transition-300);
 }
 
 .btn-primary {
@@ -193,13 +193,13 @@
   &:hover:not(:disabled) {
     background-color: var(--bg-voilet);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-voilet-glow);
   }
 
   &:disabled {
     background-color: var(--bg-light);
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: var(--opacity-06);
   }
 }
 
@@ -245,12 +245,12 @@
     display: block;
     margin: var(--spacing-20) auto;
     padding: var(--spacing-15) var(--spacing-30);
-    background-color: rgb(98, 111, 181);
+    background-color: var(--bg-player-active);
     cursor: pointer;
     color: var(--text-light);
     border: none;
     border-radius: var(--radius-6);
-    transition: all 0.3s;
+    transition: all var(--transition-300);
 
     &:hover {
       background-color: var(--bg-home-blue);

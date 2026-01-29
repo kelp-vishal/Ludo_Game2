@@ -5,7 +5,7 @@ form {
   padding: var(--spacing-32);
   background: var(--bg-login-si);
   border-radius: var(--radius-8);
-  box-shadow: 0 0 var(--spacing-16) var(--border-1) rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 var(--spacing-16) var(--border-1) var(--shadow-dark-05);
 }
 
 form h2 {
@@ -89,7 +89,7 @@ form p {
   background-color: var(--bg-form-button-light);
   color: var(--text-form-heading);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-200);
 }
 
 .button:hover:not(:disabled),
@@ -98,7 +98,7 @@ form p {
 }
 
 .button:disabled {
-  opacity: 0.6;
+  opacity: var(--opacity-06);
   cursor: not-allowed;
 }
 

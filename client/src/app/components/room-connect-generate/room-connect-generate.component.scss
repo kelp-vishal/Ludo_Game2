@@ -13,13 +13,13 @@
   border: var(--border-2) solid var(--text-dark);
   padding: var(--spacing-20);
   margin: var(--spacing-10);
-  width: var(--room-width, 300px);
-  height: var(--room-height, 200px);
+  width: var(--room-width);
+  height: var(--room-height);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  box-shadow: var(--shadow-room, 5px 5px 15px rgba(234, 205, 205, 0.3));
+  box-shadow: var(--shadow-room);
   border-radius: var(--radius-10);
 }
 

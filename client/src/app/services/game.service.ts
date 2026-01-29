@@ -205,6 +205,12 @@ export class GameService {
     this.gameState.diceValue = 0;
     this.gameState.gameWon = null;
     this.gameState.movablePieces = [];
+    
+    // Sync pieces to UI immediately after initialization
+    this.syncUiPieces();
+    
+    // Emit initial game state to update all subscribers
+    this.gameStateSubject.next({ ...this.gameState });
   }
 
   rollDice(): number {
@@ -312,6 +318,9 @@ export class GameService {
     if (!gotSix && !killedSomeone) {
       this.gameState.currentTurn =
         (this.gameState.currentTurn + 1) % this.gameState.activePlayers.length;
+      // console.log('Turn changed to:', this.gameState.activePlayers[this.gameState.currentTurn], 'Turn index:', this.gameState.currentTurn);
+    } else {
+      // console.log('Turn retained - Got 6:', gotSix, 'Killed someone:', killedSomeone);
     }
 
     // Reset
@@ -319,6 +328,7 @@ export class GameService {
     this.gameState.diceValue = 0;
 
     this.checkWin();
+    this.syncUiPieces();
     this.gameStateSubject.next({ ...this.gameState });
 
     this.isAnimating = false;
@@ -523,6 +533,10 @@ export class GameService {
 
   getMyColor(): string {
     return this.myColor;
+  }
+
+  getPiecesArray(): IPiece[] {
+    return this.piecesSubject.value;
   }
 
   private checkWin(): void {

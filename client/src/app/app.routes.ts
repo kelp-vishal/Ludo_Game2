@@ -12,7 +12,7 @@ export const routes: Routes = [
   {
     path: '',
     component: BaseComponent,
-    
+
     children: [
       {
         path: '',
@@ -36,7 +36,6 @@ export const routes: Routes = [
         component: GameSetupComponent,
         canActivate: [AuthGuard],
       },
-      { path: '**', component: HomeComponent }
     ],
   },
   {
@@ -44,4 +43,5 @@ export const routes: Routes = [
     component: LudoBoardComponent,
     canActivate: [AuthGuard],
   },
+  { path: '**', component: HomeComponent },
 ];
