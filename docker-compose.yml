@@ -1,0 +1,66 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: ludo-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ludouser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ludopass}
+      POSTGRES_DB: ${POSTGRES_DB:-ludogame}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ludo-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ludouser}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NestJS Server
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    container_name: ludo-server
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: ${POSTGRES_USER:-ludouser}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-ludopass}
+      DB_DATABASE: ${POSTGRES_DB:-ludogame}
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ludo-network
+    restart: unless-stopped
+
+  # Angular Client
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: ludo-client
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+    networks:
+      - ludo-network
+    restart: unless-stopped
+
+networks:
+  ludo-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
