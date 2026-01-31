@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal, inject, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { IPiece } from '../../interfaces/ludo-board.interfaces';
@@ -27,6 +27,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
   socketService = inject(SocketService);
   roomService = inject(RoomService);
   router = inject(Router);
+  cdr = inject(ChangeDetectorRef);
 
   pieces$ = this.gameService.pieces$;
   currentRoom$ = this.roomService.currentRoom$;
@@ -38,17 +39,22 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Subscribe to pieces changes
-    const piecesSubscription = this.gameService.pieces$.subscribe(
-      (pieces) => {
-        this.pieces = pieces;
-      },
-    );
+    const piecesSubscription = this.gameService.pieces$.subscribe((pieces) => {
+      this.pieces = pieces;
+    });
 
     // Subscribe to gameState changes
     const gameStateSubscription = this.gameService.gameState$.subscribe(
       (state) => {
         this.gameState = state;
-        // DON'T update valueDice here - it's managed by rollDice() and remote updates
+        // Update valueDice signal whenever gameState changes
+        if (state.diceValue > 0) {
+          this.valueDice.set(state.diceValue);
+        } else {
+          this.valueDice.set(1);
+        }
+        // Trigger change detection to ensure UI updates
+        this.cdr.detectChanges();
       },
     );
 
@@ -64,6 +70,8 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
             // Reset dice to 1 when no active dice roll
             this.valueDice.set(1);
           }
+          // Trigger change detection for remote updates
+          this.cdr.detectChanges();
         }
       });
 
@@ -83,12 +91,18 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
     // Subscribe to player-left event during active game
     const playerLeftSubscription = this.socketService.playerLeft$.subscribe(
-      (data: { playerColor?: string; playerName?: string; gameEnded?: boolean }) => {
+      (data: {
+        playerColor?: string;
+        playerName?: string;
+        gameEnded?: boolean;
+      }) => {
         if (!data) return;
 
         // Check if game ended because player left
         if (data.gameEnded) {
-          alert(`${data.playerName || 'A player'} left and no sufficient players left to play. Returning to home...`);
+          alert(
+            `${data.playerName || 'A player'} left and no sufficient players left to play. Returning to home...`,
+          );
           this.router.navigate(['/']);
           return;
         }
@@ -97,7 +111,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
         if (data.playerColor && this.gameState) {
           // Remove disconnected player from active players
           this.gameState.activePlayers = this.gameState.activePlayers.filter(
-            (color) => color !== data.playerColor
+            (color) => color !== data.playerColor,
           );
 
           // Remove all their pieces from the board
@@ -109,7 +123,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
           // Adjust current turn if needed
           if (this.gameState.activePlayers.length > 0) {
-            this.gameState.currentTurn = 
+            this.gameState.currentTurn =
               this.gameState.currentTurn % this.gameState.activePlayers.length;
           }
 
@@ -119,14 +133,22 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
           // Update the game state
           this.gameService.updateGameState(this.gameState);
-          
+
           // Show notification
-          alert(`${data.playerName || data.playerColor} has disconnected. Game continues with ${this.gameState.activePlayers.length} players.`);
+          alert(
+            `${data.playerName || data.playerColor} has disconnected. Game continues with ${this.gameState.activePlayers.length} players.`,
+          );
         }
-      }
+      },
     );
 
-    this.subscriptions.push(piecesSubscription, gameStateSubscription, socketStateSubscription, gameEndedSubscription, playerLeftSubscription);
+    this.subscriptions.push(
+      piecesSubscription,
+      gameStateSubscription,
+      socketStateSubscription,
+      gameEndedSubscription,
+      playerLeftSubscription,
+    );
   }
 
   ngOnDestroy(): void {
@@ -182,12 +204,13 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
       this.isRolling = true;
 
       const diceValue = this.gameService.rollDice();
-      this.valueDice.set(diceValue);
-      
+      // valueDice will be updated by gameStateSubscription
       this.syncGameStateWithOthers();
 
       setTimeout(() => {
         this.isRolling = false;
+        // Manually trigger change detection to update dice face
+        this.cdr.detectChanges();
 
         // Check if  no movable pieces
         if (this.gameState?.movablePieces?.length === 0) {
@@ -198,23 +221,19 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
               this.gameState.activePlayers.length;
             this.gameService.updateGameState(this.gameState);
             this.syncGameStateWithOthers();
-            
+
             // Reset dice display when turn changes
-            this.valueDice.set(1);
+            // this.valueDice.set(1);
           }
-        } else {
-          // Normal case
+        } else if (this.gameState?.movablePieces?.length === 1) {
+          const pieceId = this.gameState.movablePieces[0];
 
-          // Auto-move if -one piece only
-          if (this.gameState?.movablePieces?.length === 1) {
-            const pieceId = this.gameState.movablePieces[0];
-
-            setTimeout(() => {
-              this.selectPiece(pieceId);
-            }, 300);
-          }
+          setTimeout(() => {
+            this.selectPiece(pieceId);
+          }, 300);
         }
-      }, 800);
+       
+      }, 400);
     }
   }
 
@@ -228,18 +247,6 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
 
     const oldPos = this.gameState?.pieces[pieceId] ?? -1;
 
-    // Calculate new position before animating
-    // const diceValue = this.gameState?.diceValue ?? 0;
-    // let newPos = oldPos;
-    // if (oldPos === -1 && diceValue === 6) {
-    //   newPos = 0;
-    // } else if (oldPos >= 0) {
-    //   newPos = oldPos + diceValue;
-    // }
-
-    // // Sync with othr players
-    // this.syncGameStateWithOthers(pieceId, oldPos, newPos);
-
     const moved = await this.gameService.movePiece(
       pieceId,
       (pId: string, fromPos: number, toPos: number) => {
@@ -250,9 +257,7 @@ export class LudoBoardComponent implements OnInit, OnDestroy {
       const newPos = this.gameState?.pieces[pieceId] ?? -1;
       //Sync
       this.syncGameStateWithOthers(pieceId, oldPos, newPos);
-      
-      // Reset dice display after piece moves
-      this.valueDice.set(1);
+
     }
   }
 

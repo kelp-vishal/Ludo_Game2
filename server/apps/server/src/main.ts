@@ -24,14 +24,6 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
-  // Enable CORS
-  // app.enableCors({
-  //   origin: [frontendLocal],
-  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  //   allowedHeaders: ['Content-Type', 'Authorization'],
-  //   credentials: true,
-  // });
-
   // Swagger doc
   const config = new DocumentBuilder()
     .setTitle('Ludo Game API')

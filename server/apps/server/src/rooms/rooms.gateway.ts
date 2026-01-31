@@ -38,39 +38,6 @@ export class RoomsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     });
   }
 
-  // handleDisconnect(client: Socket): void {
-  //   this.logger.log(`User disconnected:, ${client.id}`);
-
-  //   const roomId = this.playerRooms.get(client.id);
-  //   if (!roomId) return;
-
-  //   const room = this.rooms.get(roomId);
-  //   if (!room) {
-  //     this.playerRooms.delete(client.id);
-  //     return;
-  //   }
-
-  //   room.players = room.players.filter((p) => p.socketId !== client.id);
-  //   room.currentPlayers = Math.max(0, room.currentPlayers - 1);
-
-  //   if (room.currentPlayers === 0) {
-  //     this.rooms.delete(roomId);
-  //     this.roomColorIndex.delete(roomId);
-  //   } else {
-  //     if (room.hostSocketId === client.id) {
-  //       room.hostSocketId = room.players[0]?.socketId;
-  //     }
-
-  //     this.server.to(roomId).emit('player-left', {
-  //       roomId,
-  //       room,
-  //       socketId: client.id,
-  //     });
-  //   }
-
-  //   this.playerRooms.delete(client.id);
-  // }
-
   handleDisconnect(client: Socket): void {
     this.logger.log(`User disconnected:, ${client.id}`);
 

@@ -52,7 +52,11 @@
         (click)="selectPiece(piece.id)"
         (keyup.enter)="selectPiece(piece.id)"
         (keyup.space)="selectPiece(piece.id)"
-        [attr.tabindex]="isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id) ? 0 : -1"
+        [attr.tabindex]="
+          isMyPiece(piece) && gameState?.movablePieces?.includes(piece.id)
+            ? 0
+            : -1
+        "
         [attr.data-id]="piece.id"
         role="button"
       ></div>
@@ -73,84 +77,84 @@
       {{ getCurrentPlayerName() }}'s Turn
     </div>
 
-    <!-- Dice -->
-    <div
-      class="dice-container"
-      (click)="rollDice()"
-      (keyup.enter)="rollDice()"
-      (keyup.space)="rollDice()"
-      [ngClass]="{
-        disabled: !isMyTurn() || valueDice() > 1 || isGameWon(),
-      }"
-      [attr.tabindex]="!isMyTurn() || valueDice() > 1 || isGameWon() ? -1 : 0"
-      role="button"
-    >
       <div
-        class="dice"
-        [ngClass]="{ rolling: isRolling }"
-        [attr.data-value]="valueDice()"
+        class="dice-container"
+        (click)="rollDice()"
+        (keyup.enter)="rollDice()"
+        (keyup.space)="rollDice()"
+        [ngClass]="{
+          disabled: !isMyTurn() || (gameState?.diceValue || 0) > 0 || isGameWon(),
+        }"
+
+        [attr.tabindex]="!isMyTurn() || valueDice() > 1 || isGameWon() ? -1 : 0"
+        role="button"
       >
-        <!-- Face 1 -->
-        <div class="face front">
-          <span class="dot dot-center"></span>
-        </div>
+        <div
+          class="dice"
+          [ngClass]="{ rolling: isRolling }"
+          [attr.data-value]="valueDice()"
+        >
+          <!-- Face 1 -->
+          <div class="face front">
+            <span class="dot dot-center"></span>
+          </div>
 
-        <!-- Face 2 -->
-        <div class="face back">
-          <span class="dot"></span>
-          <span class="dot dot-bottom-right"></span>
-        </div>
+          <!-- Face 2 -->
+          <div class="face back">
+            <span class="dot"></span>
+            <span class="dot dot-bottom-right"></span>
+          </div>
 
-        <!-- Face 3 -->
-        <div class="face left">
-          <span class="dot"></span>
-          <span class="dot dot-center"></span>
-          <span class="dot dot-bottom-right"></span>
-        </div>
+          <!-- Face 3 -->
+          <div class="face left">
+            <span class="dot"></span>
+            <span class="dot dot-center"></span>
+            <span class="dot dot-bottom-right"></span>
+          </div>
 
-        <!-- Face 4 -->
-        <div class="face right">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot dot-bottom-left"></span>
-          <span class="dot dot-bottom-right"></span>
-        </div>
+          <!-- Face 4 -->
+          <div class="face right">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </div>
 
-        <!-- Face 5 -->
-        <div class="face top">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot dot-center"></span>
-          <span class="dot dot-bottom-left"></span>
-          <span class="dot dot-bottom-right"></span>
-        </div>
+          <!-- Face 5 -->
+          <div class="face top">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot dot-center"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </div>
 
-        <!-- Face 6 -->
-        <div class="face bottom">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot dot-middle-left"></span>
-          <span class="dot dot-middle-right"></span>
-          <span class="dot dot-bottom-left"></span>
-          <span class="dot dot-bottom-right"></span>
+          <!-- Face 6 -->
+          <div class="face bottom">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot dot-middle-left"></span>
+            <span class="dot dot-middle-right"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Dice Text -->
-    <div class="dice-instruction text-size-14 text-weight-400">
-      {{
-        (gameState?.diceValue || 0) > 0
-          ? 'Select a piece to move'
-          : 'Click dice to roll'
-      }}
-    </div>
-
-    <!-- Win Message -->
-    @if (isGameWon()) {
-      <div class="win-message text-size-24 text-weight-bold">
-        {{ gameState?.gameWon }} WINS!!
+      <!-- Dice Text -->
+      <div class="dice-instruction text-size-14 text-weight-400">
+        {{
+          (gameState?.diceValue || 0) > 0
+            ? 'Select a piece to move'
+            : 'Click dice to roll'
+        }}
       </div>
-    }
+
+      <!-- Win Message -->
+      @if (isGameWon()) {
+        <div class="win-message text-size-24 text-weight-bold">
+          {{ gameState?.gameWon }} WINS!!
+        </div>
+      }
+    </div>
   </div>
-</div>
