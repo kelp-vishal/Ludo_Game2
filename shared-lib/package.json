@@ -1,0 +1,23 @@
+{
+  "name": "@ludo-game/shared-lib",
+  "version": "1.0.0",
+  "description": "Shared library for Ludo Game - common interfaces, enums, and constants",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.2",
+    "tslib": "^2.3.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0"
+  },
+  "peerDependencies": {},
+  "author": "Your Name",
+  "license": "MIT"
+}

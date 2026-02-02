@@ -1,0 +1,181 @@
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--spacing-16);
+  margin: var(--spacing-8) 0;
+}
+
+.control {
+  flex: 1;
+  min-width: var(--width-240);
+}
+
+button {
+  padding: var(--spacing-8) var(--spacing-28);
+  margin-top: var(--spacing-16);
+}
+
+form {
+  width: 90%;
+  max-width: var(--width-640);
+  margin: var(--spacing-48) auto;
+  padding: var(--spacing-32);
+  background: var(--bg-login-si);
+  border-radius: var(--radius-8);
+  box-shadow: 0 0 var(--spacing-16) var(--border-1) var(--shadow-dark-05);
+}
+
+.control,
+fieldset {
+  margin: var(--spacing-8) 0;
+}
+
+.control.no-margin {
+  margin-bottom: 0;
+}
+
+.control label {
+  display: block;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+  color: var(--text-form-label);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-700);
+}
+
+.control input {
+  display: block;
+  width: 100%;
+  max-width: var(--width-240);
+  padding: var(--spacing-8);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-4);
+  border: var(--border-1) var(--border-form-input);
+  background-color: var(--bg-form-input);
+  color: var(--text-form-input);
+}
+
+.control input:focus {
+  outline: none;
+  background-color: var(--bg-form-input-focus);
+  border-color: var(--border-form-input-focus);
+}
+
+.control select {
+  display: block;
+  width: 100%;
+  max-width: var(--width-240);
+  padding: var(--spacing-8);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-4);
+  border: var(--border-1) var(--border-form-input);
+  background-color: var(--bg-form-input);
+  color: var(--text-form-input);
+}
+
+.control:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+}
+
+.control:has(input[type="checkbox"]) label {
+  margin: 0;
+}
+
+.control input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  max-width: none;
+  margin-right: var(--spacing-8);
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--text-form-heading);
+}
+
+.control-error {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  color: var(--text-form-error);
+  height: var(--height-8);
+  padding: var(--spacing-4) 0 0 0;
+  height: var(--height-24);
+  margin-bottom: var(--spacing-16);
+}
+
+.control-error p {
+  margin: 0;
+}
+
+hr {
+  margin: var(--spacing-24) 0;
+  border: var(--border-1) var(--bg-form-button-light);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-16);
+}
+
+.button {
+  padding: var(--spacing-8) var(--spacing-16);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-4);
+  border: none;
+  background-color: var(--bg-form-button-light);
+  color: var(--text-form-heading);
+  cursor: pointer;
+  transition: background-color var(--transition-200);
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--bg-form-button-dark);
+}
+
+.button:disabled {
+  opacity: var(--opacity-06);
+  cursor: not-allowed;
+}
+
+.button-flat {
+  background-color: transparent;
+  color: var(--bg-form-button);
+}
+
+.button-flat:hover,
+.button-flat:focus {
+  background-color: transparent;
+  color: var(--bg-form-input);
+}
+
+.control-success {
+  color: var(--text-form-success);
+  font-size: var(--font-size-md);
+  margin-top: var(--spacing-8);
+}
+
+.form-info {
+  margin-top: var(--spacing-24);
+  text-align: center;
+  color: var(--text-form-label);
+  font-size: var(--font-size-md);
+}
+
+.form-info a {
+  color: var(--bg-form-button-light);
+  text-decoration: none;
+  font-weight: var(--font-weight-700);
+}
+
+.form-info a:hover {
+  color: var(--bg-form-button-dark);
+  text-decoration: underline;
+}
+
+.loginsu {
+  cursor: pointer;
+}

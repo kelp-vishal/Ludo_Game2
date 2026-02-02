@@ -1,0 +1,25 @@
+<div class="home-container">
+  <div class="home">
+    <div class="welcome-message">
+      <h1 class="text-larger-h1">Welcome to the Ludo Game!</h1>
+      <p *ngIf="!isLoggedIn" class="text-larger-p">
+        Please login or signup to start playing with your friends and family.
+      </p>
+      <p *ngIf="isLoggedIn" class="pWelcome text-larger-p"> 
+        Welcome back, {{ username }}! Ready to play?
+      </p>
+    </div>
+
+    <div class="ludo-image-container">
+      <img
+        src="assets/ludo-base-image.png"
+        alt="Ludo Game Image"
+        class="ludo-image"
+      />
+    </div>
+  </div>
+  
+  <button class="animated-btn text-large-button" (click)="startGame()">
+    {{ isLoggedIn ? "Start Game" : "Login to Play" }}
+  </button>
+</div>

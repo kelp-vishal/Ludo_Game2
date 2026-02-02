@@ -1,0 +1,202 @@
+<div
+  class="setup-screen"
+  [ngClass]="{
+    menu: view === 'menu',
+    create: view === 'create',
+    join: view === 'join'
+  }"
+>
+  <div *ngIf="view === 'menu'" class="menu-view">
+    <h2 class="text-bold-l">Ludo Game</h2>
+
+    <p
+      class="connection-status text-bold-large"
+      [ngClass]="{
+        warning: !isSocketConnected,
+        success: isSocketConnected
+      }"
+    >
+      {{
+        isSocketConnected
+          ? 'You can Create or Join the Room'
+          : 'Connecting to server...'
+      }}
+    </p>
+
+    <div class="menu-buttons">
+      <button
+        (click)="showCreateRoom()"
+        [disabled]="!isSocketConnected"
+        class="btn-primary text-bold-large"
+        [ngClass]="{ disabled: !isSocketConnected }"
+      >
+        Create Room
+      </button>
+
+      <button
+        (click)="showJoinRoom()"
+        [disabled]="!isSocketConnected"
+        class="btn-primary text-bold-large"
+        [ngClass]="{ disabled: !isSocketConnected }"
+      >
+        Join Room
+      </button>
+    </div>
+  </div>
+
+  <!-- // Room view -->
+  <div *ngIf="view === 'create'" class="create-room-view">
+    <h2 class="text-bold-l">Create a Room</h2>
+
+    <div class="form-group">
+      <label class="text-weight-bold">Your Name:</label>
+      <input
+        type="text"
+        [(ngModel)]="playerName"
+        placeholder="Enter your name"
+        class="input-field"
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="text-weight-bold">Number of Players:</label>
+      <div class="player-options">
+        <button
+          *ngFor="let count of [2, 3, 4]"
+          (click)="selectedPlayerCount = count"
+          class="player-btn text-bold-large"
+          [ngClass]="{ active: selectedPlayerCount === count }"
+        >
+          {{ count }} Players
+        </button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button
+        (click)="createRoom()"
+        class="btn-success text-bold-large"
+      >
+        Create Room
+      </button>
+
+      <button
+        (click)="backToMenu()"
+        class="btn-secondary text-bold-large"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+
+  <!-- Join Room -->
+  <div *ngIf="view === 'join'" class="join-room-view">
+    <h2 class="text-bold-l">Join a Room</h2>
+
+    <div class="form-group">
+      <label class="text-weight-bold">Your Name:</label>
+      <input
+        type="text"
+        [(ngModel)]="playerName"
+        placeholder="Enter your name"
+        class="input-field"
+      />
+    </div>
+
+    <div class="rooms-list">
+      <h3 class="text-size-24">Available Rooms:</h3>
+
+      <div *ngIf="availableRooms.length === 0" class="no-rooms">
+        No available rooms. Create one instead!
+      </div>
+
+      <div *ngFor="let room of availableRooms" class="room-item">
+        <div class="room-info">
+          <p class="text-size-14">
+            <strong>Room ID:</strong> {{ room.roomId }}
+          </p>
+
+          <p class="text-size-14">
+            <strong>Players:</strong>
+            {{ room.currentPlayers }}/{{ room.maxPlayers }}
+          </p>
+
+          <p
+            *ngFor="let player of room.players"
+            class="player-info text-size-12"
+          >
+            • {{ player.playerName || 'Player' }} ({{ player.color }})
+          </p>
+        </div>
+
+        <button
+          (click)="joinRoom(room.roomId)"
+          class="btn-success text-bold-large"
+          [disabled]="room.currentPlayers >= room.maxPlayers"
+          [ngClass]="{
+            disabled: room.currentPlayers >= room.maxPlayers
+          }"
+        >
+          Join Room
+        </button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button
+        (click)="backToMenu()"
+        class="btn-secondary text-bold-large"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="currentRoom$ | async as room" class="waiting-room">
+    <h2 class="text-bold-l">Room: {{ room.roomId }}</h2>
+
+    <div class="room-details">
+      <p class="text-size-18">
+        <strong>Players:</strong>
+        {{ room.currentPlayers }}/{{ room.maxPlayers }}
+      </p>
+
+      <div class="players-in-room">
+        <div *ngFor="let player of room.players" class="player-card">
+          <span
+            class="player-color"
+            [ngClass]="{
+              red: player.color === 'RED',
+              blue: player.color === 'BLUE',
+              green: player.color === 'GREEN',
+              yellow: player.color === 'YELLOW'
+            }"
+          ></span>
+
+          <span class="player-name">
+            {{ player.playerName || 'Player' }}
+          </span>
+        </div>
+      </div>
+
+      <button
+        *ngIf="isHost(room)"
+        (click)="startGameInRoom()"
+        class="btn-success text-bold-large"
+        [disabled]="room.currentPlayers < 2"
+        [ngClass]="{
+          disabled: room.currentPlayers < 2
+        }"
+      >
+        Start Game (Host Only)
+      </button>
+
+      <p
+        *ngIf="!isHost(room)"
+        class="waiting-message"
+      >
+        Waiting for host to start the game...
+      </p>
+    </div>
+  </div>
+</div>

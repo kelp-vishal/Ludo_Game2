@@ -1,0 +1,109 @@
+:root {
+  //primary colors
+
+  //Text color
+  --text-light: #ffffff;
+  --text-dark: rgb(13, 6, 6);
+  --text-green: #46d30a;
+  --text-voilet: #667eea;
+  --text-orange: #ca571d;
+  --text-aqua: #1a9ac4;
+  --text-pink: rgb(210, 63, 243);
+
+  // Background Colors
+  --bg-voilet: rgb(37, 106, 224);
+  --bg-light: rgb(255, 255, 255);
+  --bg-root: linear-gradient(130deg, rgb(0, 96, 83), rgb(0, 0, 194));
+  --bg-very-light: #f8f9fa;
+
+  --bg-form: linear-gradient(180deg, #253c3c, #1d4949);
+  --bg-login-si:linear-gradient(180deg, #1d3ca3, #051667);
+  --bg-form-button-light: #147b73;
+  --bg-form-button-dark: #319890;
+  --bg-form-button: #9cbaba;
+  --bg-form-input: #869999;
+  --bg-form-input-focus: #a1b4b4;
+
+  --text-form-label: #9bafaf;
+  --text-form-input: #142020;
+  --text-form-heading: #d9e2f1;
+  --text-form-error: #ffca99;
+  --text-form-success: #4caf50;
+  --text-error-red: #f44336;
+  
+  --border-form-input: #758a8a;
+  --border-form-input-focus: #147b73;
+
+  --sidebar-bg: rgb(2, 19, 170);
+  --link-color: #0b3a4a;
+  --bg-sidebar: rgb(2, 19, 170);
+  --bg-sidebar-a-hover: rgba(255, 255, 255, 0.08);
+
+  --bg-home-h1: #1a9ac4;
+  --bg-home-button: linear-gradient(45deg, #ff0000, #fffb00, #48ff00, #002bff);
+
+  --bg-status-success: #46d30a;
+  --bg-status-warning: #ff9800;
+  --bg-danger: #f44336;
+  --bg-danger-hover: #d32f2f;
+
+  --bg-create-join-room: rgba(255, 255, 255, 0.95);
+  --bg-player-btn: #e0e0e0;
+  --bg-player-active: rgb(98, 111, 181);
+  
+  --shadow-rgba-light: rgba(0, 0, 0, 0.1);
+  
+  --bg-center-gradient-start: #f1c40f;
+  --bg-center-gradient-end: #e67e22;
+  
+  --shadow-rgba-04: rgba(255, 255, 255, 0.4);
+  --shadow-rgba-03: rgba(255, 255, 255, 0.3);
+  
+  --shadow-room: 5px 5px 15px rgba(234, 205, 205, 0.3);
+  --shadow-dark-05: rgba(0, 0, 0, 0.5);
+  --shadow-dark-02: rgba(0, 0, 0, 0.2);
+  --shadow-dark-03: rgba(0, 0, 0, 0.3);
+  --shadow-dark-015: rgba(0, 0, 0, 0.15);
+  --shadow-dark-025: rgba(0, 0, 0, 0.25);
+  --shadow-voilet-glow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  --shadow-white-09: rgba(255, 255, 255, 0.9);
+  --shadow-white-06: rgba(255, 255, 255, 0.6);
+  --shadow-blue-04: rgba(52, 152, 219, 0.4);
+  --shadow-blue-06: rgba(52, 152, 219, 0.6);
+  --shadow-gold-04: rgba(255, 215, 0, 0.4);
+
+  // Ludo-Board
+  --bg-ludo-board: #ecf0f1;
+  --bg-cell: #fff;
+  --bg-home-red: rgba(242, 88, 88, 0.4);
+  --bg-home-yellow: rgba(244, 242, 84, 0.4);
+  --bg-home-green: rgb(94, 240, 94);
+  --bg-home-blue: rgba(56, 190, 248, 0.4);
+
+  --bg-Border-red: #d50000;
+  --bg-Border-yellow: rgb(199, 199, 0);
+  --bg-Border-blue: rgb(4, 67, 225);
+  --bg-Border-green: rgb(4, 193, 1);
+
+  --bg-dice-face: linear-gradient(145deg, #ffefcb 0%, #a5a467 100%);
+  --bg-dice-dot: radial-gradient(circle, #1a1a1a 40%, #000 100%);
+
+  --bg-rollButton-disable: linear-gradient(135deg, #5dade2, #3498db);
+  --bg-dice-disable: linear-gradient(135deg, #7f8c8d, #789b9e);
+
+  --bg-finish-zone: rgba(251, 0, 239, 0.2);
+  --bg-room-coonect: rgb(190, 203, 249);
+  --bg-start-zone: rgba(255, 136, 0, 0.2);
+  --border-start-zone: #e67e22;
+  
+  // Gradient rgba values
+  --gradient-white-0: rgba(255, 255, 255, 0);
+  --gradient-white-06: rgba(255, 255, 255, 0.6);
+  --gradient-white-01: rgba(255, 255, 255, 0.1);
+  --gradient-black-01: rgba(0, 0, 0, 0.1);
+
+  //Border
+  --border-input-field: #667eea;
+
+  --token-color: #d50000;
+}

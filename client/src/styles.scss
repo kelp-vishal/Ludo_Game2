@@ -1,0 +1,14 @@
+@use "../styles/colors.scss";
+@use "../styles/variables.scss" as *;
+
+// Import typography classes globally so they work across all components
+@import "../styles/typography.scss";
+
+header {
+  padding: auto;
+}
+body {
+  margin: 0;
+  background-image: var(--bg-root);
+  color: var(--text-light);
+}
